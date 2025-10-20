@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Calculator</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <div class="calculator-grid">
+        <!-- Màn hình hiển thị -->
+        <div class="output">
+            <div data-previous-operand class="previous-operand"></div>
+            <div data-current-operand class="current-operand">0</div>
+        </div>
+
+        <!-- Hàng nút đầu tiên -->
+        <button data-operator>&percnt;</button>
+        <button data-action="clear-entry">CE</button>
+        <button data-action="clear">C</button>
+        <button data-action="backspace">&#9003;</button>
+
+        <!-- Hàng nút thứ hai -->
+        <button data-operator>1/x</button>
+        <button data-operator>x&sup2;</button>
+        <button data-operator data-operation="sqrt"><sup>2</sup>&radic;x</button>
+        <button data-operator>&divide;</button>
+
+        <!-- Hàng nút thứ ba -->
+        <button data-number>7</button>
+        <button data-number>8</button>
+        <button data-number>9</button>
+        <button data-operator>&times;</button>
+
+        <!-- Hàng nút thứ tư -->
+        <button data-number>4</button>
+        <button data-number>5</button>
+        <button data-number>6</button>
+        <button data-operator>&minus;</button>
+
+        <!-- Hàng nút thứ năm -->
+        <button data-number>1</button>
+        <button data-number>2</button>
+        <button data-number>3</button>
+        <button data-operator>&plus;</button>
+
+        <!-- Hàng nút cuối cùng -->
+        <button data-action="negate">&plusmn;</button>
+        <button data-number>0</button>
+        <button data-number>.</button>
+        <button data-action="equals" class="span-two">&equals;</button>
+    </div>
+</body>
+</html>

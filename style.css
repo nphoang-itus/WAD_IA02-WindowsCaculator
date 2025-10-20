@@ -1,0 +1,102 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: normal;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(to right, #00AAFF, #00FF6C);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100svh;
+  padding: clamp(12px, 3vh, 28px); /* khoảng trống trên/dưới và hai bên */
+}
+
+/* Grid mặc định (mobile) */
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(68px, auto);
+  width: min(94vw, 520px);     /* chừa mép 2 bên trên mobile */
+  margin: 0 auto;              /* giữa theo ngang */
+  gap: 8px;
+  background-color: #f2f2f2;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
+
+/* Nút lấp đầy ô */
+.calculator-grid > button {
+  cursor: pointer;
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  border: 1px solid #fff;
+  outline: none;
+  background-color: #fafafa;
+  transition: background-color .15s;
+  justify-self: stretch;
+  align-self: stretch;
+}
+
+/* "=" chiếm 2 cột */
+.calculator-grid > button.span-two {
+  background-color: #0078d4;
+  color: #fff;
+}
+.calculator-grid > button.span-two:hover { background-color: #005a9e; }
+
+/* Kiểu cho các nút toán tử */
+button[data-operator] {
+  background-color: #e9e9e9;
+}
+button[data-operator]:hover {
+  background-color: #d9d9d9;
+}
+
+.output {
+  grid-column: 1 / -1;
+  background-color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+  padding: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+  min-height: 120px;
+}
+
+.previous-operand {
+    color: rgba(0, 0, 0, .75);
+    font-size: 1.5rem;
+}
+
+.current-operand {
+    color: black;
+    font-size: 2.5rem;
+}
+
+/* --- MEDIA QUERY CHO MÀN HÌNH LỚN HƠN (DESKTOP) --- */
+@media screen and (min-width: 768px) {
+    .calculator-grid {
+        width: clamp(640px, 85vw, 900px);
+        grid-template-columns: repeat(4, minmax(120px, 1fr));
+        grid-auto-rows: minmax(90px, 1fr);
+        gap: 10px;
+    }
+
+    .current-operand { font-size: 3rem; }
+}
+
+/* Desktop rộng, chừa khoảng trống trên/dưới đẹp mắt */
+@media (min-width: 992px) {
+  body { padding: clamp(20px, 5vh, 40px); }  /* thêm “breathing space” trên/dưới */
+  .calculator-grid {
+    width: clamp(720px, 70vw, 980px);       /* grid giãn nhưng không full mép */
+    grid-template-columns: repeat(4, minmax(140px, 1fr));
+    grid-auto-rows: minmax(100px, 1fr);
+    gap: 12px;
+  }
+}
