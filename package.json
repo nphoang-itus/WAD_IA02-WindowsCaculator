@@ -1,0 +1,24 @@
+{
+  "name": "web-calculator",
+  "version": "1.0.0",
+  "description": "This is the windows 11 calculator but made with web technologies such as HTML, CSS and JavaScript.",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nphoang-itus/WAD_IA02-WindowsCaculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nphoang-itus/WAD_IA02-WindowsCaculator/issues"
+  },
+  "homepage": "https://github.com/nphoang-itus/WAD_IA02-WindowsCaculator#readme",
+  "devDependencies": {
+    "jest": "^30.2.0"
+  }
+}
