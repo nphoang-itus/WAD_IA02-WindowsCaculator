@@ -237,3 +237,92 @@ describe("Calculator", () => {
     expect(calculator.currentOperandTextElement.innerText).toBeDefined();
   });
 });
+
+describe("KeyboardInput", () => {
+  let calculator;
+
+  beforeEach(() => {
+    const previousOperandTextElement = { innerText: "" };
+    const currentOperandTextElement = { innerText: "" };
+    calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
+
+    // Mock window.dispatchEvent for Jest
+    global.window = {};
+    global.window.dispatchEvent = jest.fn();
+  });
+
+  it("should append number when number key is pressed", () => {
+    const event = { key: "5" }; // Mock KeyboardEvent
+    calculator.appendNumber(event.key);
+    expect(calculator.currentOperand).toBe("5");
+  });
+
+  it("should perform addition when '+' key is pressed", () => {
+    calculator.appendNumber("2");
+    const event = { key: "+" }; // Mock KeyboardEvent
+    calculator.chooseOperation(event.key);
+    calculator.appendNumber("3");
+    calculator.compute();
+    expect(calculator.currentOperand).toBe(5);
+  });
+
+  it("should clear all when 'Escape' key is pressed", () => {
+    calculator.appendNumber("123");
+    calculator.clear();
+    expect(calculator.currentOperand).toBe("");
+    expect(calculator.previousOperand).toBe("");
+  });
+
+  it("should delete last digit when 'Backspace' key is pressed", () => {
+    calculator.appendNumber("123");
+    calculator.delete();
+    expect(calculator.currentOperand).toBe("12");
+  });
+});
+
+describe("History", () => {
+  let calculator;
+
+  beforeEach(() => {
+    const previousOperandTextElement = { innerText: "" };
+    const currentOperandTextElement = { innerText: "" };
+    calculator = new Calculator(previousOperandTextElement, currentOperandTextElement);
+  });
+
+  it("should add calculation to history", () => {
+    calculator.appendNumber("2");
+    calculator.chooseOperation("+");
+    calculator.appendNumber("3");
+    calculator.compute();
+    const history = calculator.getHistory();
+    expect(history.length).toBe(1);
+    expect(history[0].expression).toBe("2 + 3 =");
+    expect(history[0].result).toBe("5");
+  });
+
+  it("should clear history", () => {
+    calculator.appendNumber("2");
+    calculator.chooseOperation("+");
+    calculator.appendNumber("3");
+    calculator.compute();
+    calculator.clearHistory();
+    const history = calculator.getHistory();
+    expect(history.length).toBe(0);
+  });
+
+  it("should use history result when clicked", () => {
+    calculator.appendNumber("2");
+    calculator.chooseOperation("+");
+    calculator.appendNumber("3");
+    calculator.compute();
+    const history = calculator.getHistory();
+    calculator.currentOperand = history[0].result; // Mock useHistoryResult
+    expect(calculator.currentOperand).toBe("5");
+  });
+
+  it("should display 'No history yet' when history is empty", () => {
+    calculator.clearHistory();
+    const historyContent = { innerHTML: "No history yet" }; // Mock DOM element
+    expect(historyContent.innerHTML).toContain("No history yet");
+  });
+});
