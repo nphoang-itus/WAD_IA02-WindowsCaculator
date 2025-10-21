@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Windows Calculator</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css" />
     <script src="./Calculator.js" defer></script>
     <script src="./script.js" defer></script>
-</head>
-<body>
-    <div class="calculator-grid">
+  </head>
+  <body>
+    <div class="calculator-container">
+      <div class="calculator-wrapper">
+        <!-- History toggle button (mobile only) -->
+        <button class="history-toggle" id="historyToggle">&#x21BA;</button>
+
         <!-- Màn hình hiển thị -->
         <div class="output">
-            <div data-previous-operand class="previous-operand"></div>
-            <div data-current-operand class="current-operand">0</div>
+          <div data-previous-operand class="previous-operand"></div>
+          <div data-current-operand class="current-operand">0</div>
         </div>
-
+        
         <!-- Hàng nút đầu tiên -->
         <button data-operator>&percnt;</button>
         <button data-action="clear-entry">CE</button>
@@ -51,6 +55,22 @@
         <button data-number>0</button>
         <button data-number>.</button>
         <button data-action="equals" class="span-two">&equals;</button>
+      </div>
+
+      <!-- History Panel -->
+      <div class="history-panel" id="historyPanel">
+        <div class="history-header">
+          <h3>History</h3>
+          <button class="clear-history-btn" id="clearHistoryBtn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="history-content" id="historyContent">
+          <div class="no-history">No history yet</div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
