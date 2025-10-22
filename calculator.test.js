@@ -236,6 +236,19 @@ describe("Calculator", () => {
     calculator.updateDisplay();
     expect(calculator.currentOperandTextElement.innerText).toBeDefined();
   });
+
+  it("should display 'Error' when calculating square root of a negative number", () => {
+    calculator.appendNumber("-9");
+    calculator.handleSingleOperandOperation("sqrt");
+    expect(calculator.currentOperand).toBe("Error");
+  });
+
+  it("should display 'Error' when computing square root of a negative number with equals", () => {
+    calculator.appendNumber("-9");
+    calculator.chooseOperation("sqrt");
+    calculator.compute();
+    expect(calculator.currentOperand).toBe("Error");
+  });
 });
 
 describe("KeyboardInput", () => {

@@ -60,6 +60,11 @@ class Calculator {
 
     switch (operation) {
       case "sqrt":
+        if (current < 0) {
+          this.currentOperand = "Error"; // Hiển thị lỗi nếu căn số âm
+          // console.log("01")
+          return;
+        }
         result = Math.sqrt(current);
         break;
       case "%":
@@ -87,7 +92,7 @@ class Calculator {
     const current = parseFloat(this.currentOperand);
 
     // Kiểm tra nếu không có phép toán hoặc không có số để tính toán
-    if (this.operation == null || isNaN(prev) || isNaN(current)) return;
+    if (this.operation == null || (isNaN(prev) && isNaN(current))) return;
 
     switch (this.operation) {
       case "+":
@@ -101,6 +106,15 @@ class Calculator {
         break;
       case "÷":
         computation = prev / current;
+        break;
+      case "sqrt":
+        if (prev < 0) {
+          this.currentOperand = "Error"; // Hiển thị lỗi nếu căn số âm
+          this.previousOperand = ""; // Xóa số trước đó
+          this.operation = null; // Xóa phép toán
+          return;
+        }
+        computation = Math.sqrt(prev);
         break;
       default:
         return;
@@ -161,6 +175,7 @@ class Calculator {
 
   // Helper function để định dạng số cho đẹp hơn
   getDisplayNumber(number) {
+    if (number === "Error") return "Error"; // Trả về "Error" nếu giá trị là chuỗi "Error"
     if (number === null || number === undefined) return "";
     const stringNumber = number.toString();
     const integerDigits = parseFloat(stringNumber.split(".")[0]);
@@ -198,9 +213,7 @@ class Calculator {
       )} =`;
     } else if (this.operation != null) {
       // Hiển thị số thứ nhất và toán tử khi đang nhập
-      this.previousOperandTextElement.innerText = `${this.getDisplayNumber(
-        this.previousOperand
-      )} ${this.operation}`;
+      this.previousOperandTextElement.innerText = `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`;
     } else {
       this.previousOperandTextElement.innerText = "";
     }
